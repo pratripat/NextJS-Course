@@ -4,8 +4,8 @@ import PostList from '../components/PostList'
 function Posts() {
   return (
     <>
+      <Outlet />
       <main>
-        <Outlet />
         <PostList />
       </main>
     </>
@@ -13,3 +13,10 @@ function Posts() {
 }
 
 export default Posts;
+
+export async function loader() {
+  const response = await fetch('http://localhost:8080/posts');
+  const resData = await response.json();
+  console.log('loading');
+  return resData.posts;
+}
